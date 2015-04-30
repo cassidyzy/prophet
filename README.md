@@ -1,0 +1,2 @@
+# prophet
+Prophet for money!
