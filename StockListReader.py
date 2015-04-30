@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import pickle
 
 def read_stock_list():

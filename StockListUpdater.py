@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import pickle
 import re
 import urllib.request
@@ -25,8 +27,9 @@ if __name__ == "__main__":
             stock_list.extend(l)
         if len(l) < page_size:
             break
+    print("total stock count:%d" % len(stock_list))
     out = open("stock-list.txt", "wb")
     pickle.dump(stock_list, out)
     out.close()
         
-        
+          
