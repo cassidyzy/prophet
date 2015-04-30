@@ -6,9 +6,9 @@ import os
 import string
 
 VTP_DAYS = 50
-TESTDAYS = 0
-TREND1 = 3
-TREND2 = 1
+TESTDAYS = 1
+TREND1 = 10
+TREND2 = 2
 
 open_value = [0]*(VTP_DAYS+TESTDAYS)
 high_value = [0]*(VTP_DAYS+TESTDAYS)
@@ -104,14 +104,14 @@ def VPT(stock):
 
     if TESTDAYS > 0:
         if buy_flag:
-            if close_value[TESTDAYS-1] > close_value[TESTDAYS]:
+            if close_value[TESTDAYS-1] >= close_value[TESTDAYS]:
                 right = right + 1
-                print("RIGHT! NEW:"+str(close_value[TESTDAYS-1])+" > OLD:"+str(close_value[1+TESTDAYS]))
+                print("RIGHT! NEW:"+str(close_value[TESTDAYS-1])+" > OLD:"+str(close_value[TESTDAYS]))
             else:
                 wrong = wrong + 1
-                print("WRONG! NEW:"+str(close_value[TESTDAYS-1])+" < OLD:"+str(close_value[1+TESTDAYS]))
+                print("WRONG! NEW:"+str(close_value[TESTDAYS-1])+" < OLD:"+str(close_value[TESTDAYS]))
         if sell_flag:
-            if close_value[TESTDAYS-1] < close_value[TESTDAYS]:
+            if close_value[TESTDAYS-1] <= close_value[TESTDAYS]:
                 right = right + 1
                 print("RIGHT! NEW:"+str(close_value[TESTDAYS-1])+" < OLD:"+str(close_value[TESTDAYS]))
             else:
