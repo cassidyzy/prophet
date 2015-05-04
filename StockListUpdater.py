@@ -2,12 +2,15 @@
 
 import pickle
 import re
-import urllib.request
+
+from data.Stock import StockBasicInfo
+from utils import crawler
 
 
 def crawl_stock_info(url):
-    response = urllib.request.urlopen(url)
-    html = str(response.read(), "gbk")
+    html = crawler.crawl(url)
+    if html is None:
+        return []
     pattern = re.compile(r'symbol:"([^"]*)",code:"[^"]*",name:"([^"]*)"')
     l = []
     for m in pattern.finditer(html):
@@ -28,8 +31,17 @@ if __name__ == "__main__":
         if len(l) < page_size:
             break
     print("total stock count:%d" % len(stock_list))
+    
+    stocks = []
+    for stock in stock_list:
+        info = StockBasicInfo(stock[0], stock[1])
+        if info.isValid():
+            stocks.append(info)
+    
+    print("total valid stock: %d in %d" % (len(stocks), len(stock_list)))
+    
     out = open("stock-list.txt", "wb")
-    pickle.dump(stock_list, out)
+    pickle.dump(stocks, out)
     out.close()
         
           
