@@ -6,9 +6,9 @@ import os
 import string
 
 VTP_DAYS = 50
-TESTDAYS = 1
-TREND1 = 10
-TREND2 = 2
+TESTDAYS = 0
+TREND1 = 3
+TREND2 = 1
 
 open_value = [0]*(VTP_DAYS+TESTDAYS)
 high_value = [0]*(VTP_DAYS+TESTDAYS)
@@ -26,7 +26,8 @@ def read_stock_list():
     return pickle.load(fi)
 
 def fetch_stock_history(stock_list):
-    for s in stock_list:
+    for stock_line in stock_list:
+        s = str(stock_line).split("|")
         if s[0][:2]=="sh":
             yahoo_symbol = s[0][2:]+".ss"
         else:
@@ -125,7 +126,8 @@ if __name__ == "__main__":
     if len(sys.argv)>=2 and sys.argv[1]=="1":
         fetch_stock_history(stock_list)
 
-    for s in stock_list:
+    for stock_line in stock_list:
+        s = str(stock_line).split("|")
         stock_symbol = s[0]
         if os.path.isfile('/tmp/results/'+stock_symbol):
             loaddata_fromfile(stock_symbol)
