@@ -21,7 +21,7 @@ class StockMoneyFlow:
         superbig_volume_in = self._reg4Value(html, "r0_in")
         if superbig_volume_in is not None:
             self.superbig_volume_in = float(superbig_volume_in)
-        superbig_volume_out = self._reg4Value(html, "r0_in")
+        superbig_volume_out = self._reg4Value(html, "r0_out")
         if superbig_volume_out is not None:
             self.superbig_volume_out = float(superbig_volume_out)
 
@@ -46,13 +46,21 @@ class StockMoneyFlow:
         if supersmall_volume_out is not None:
             self.supersmall_volume_out = float(supersmall_volume_out)
 
-        total_volume = self._reg4Value(html, "volume")
-        if total_volume is not None:
-            self.total_volume = float(total_volume)
+        curr_capital = self._reg4Value(html, "curr_capital")
+        if curr_capital is not None:
+            self.curr_capital = float(curr_capital)
+
+        trade = self._reg4Value(html, "trade")
+        if trade is not None:
+            self.trade = float(trade)
 
         changeratio = self._reg4Value(html, "changeratio")
         if changeratio is not None:
             self.changeratio = float(changeratio)
+
+        total_volume = self._reg4Value(html, "volume")
+        if total_volume is not None:
+            self.total_volume = float(total_volume)
 
         turnover = self._reg4Value(html, "turnover")
         if turnover is not None:
@@ -77,5 +85,5 @@ class StockMoneyFlow:
         return self.state == 1
 
     def __str__(self):
-        return "%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s" % (self.symbol, self.name, self.state, self.superbig_volume_in, self.superbig_volume_out, self.big_volume_in, self.big_volume_out, self.small_volume_in, self.small_volume_out, self.supersmall_volume_in, self.supersmall_volume_out, self.changeratio, self.total_volume, self.turnover, self.superbig_angle)
+        return "%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s" % (self.symbol, self.name, self.state, self.superbig_volume_in, self.superbig_volume_out, self.big_volume_in, self.big_volume_out, self.small_volume_in, self.small_volume_out, self.supersmall_volume_in, self.supersmall_volume_out, self.curr_capital, self.trade, self.changeratio, self.total_volume, self.turnover, self.superbig_angle)
 
