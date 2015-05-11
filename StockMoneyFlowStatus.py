@@ -2,7 +2,7 @@ import pickle
 import time
 import codecs
 
-cur_date = "2015-05-08"
+cur_date = "2015-05-11"
 
 def read_stock_money_flow():
     fi = open("results/moneyflowdata/stock-money-flow-"+cur_date, "rb")
@@ -36,13 +36,13 @@ if __name__ == "__main__":
         superbig_angle = float(money_flow_array[16])
 
         if state == "1" and total_volume > 0:
-            if symbol == "sz002131":
-                print(str(s))
-                print(str(superbig_volume_in))
-                print(str(superbig_volume_out))
-                print(str(big_volume_in))
-                print(str(big_volume_out))
-                print(str(total_volume))
+#            if symbol == "sz002131":
+#                print(str(s))
+#                print(str(superbig_volume_in))
+#                print(str(superbig_volume_out))
+#                print(str(big_volume_in))
+#                print(str(big_volume_out))
+#                print(str(total_volume))
             output = symbol+","+name+","+str((superbig_volume_in+big_volume_in-superbig_volume_out-big_volume_out)/(total_volume*trade)*100)+","+str(changeratio*100)+","+str(turnover)+","+str(superbig_angle)+"\n"
             file_object.write(output)
 

@@ -84,6 +84,13 @@ class StockMoneyFlow:
     def isValid(self):
         return self.state == 1
 
+    def isChuangye(self):
+        m = re.search(r"^\w\w300*", self.symbol)
+        if m:
+            return True
+        else:
+            return False
+
     def __str__(self):
         return "%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s" % (self.symbol, self.name, self.state, self.superbig_volume_in, self.superbig_volume_out, self.big_volume_in, self.big_volume_out, self.small_volume_in, self.small_volume_out, self.supersmall_volume_in, self.supersmall_volume_out, self.curr_capital, self.trade, self.changeratio, self.total_volume, self.turnover, self.superbig_angle)
 

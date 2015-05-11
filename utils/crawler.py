@@ -15,5 +15,8 @@ def crawl(url, charset="gbk", timeout=10):
         print("error for url %s" % url)
         return None
     finally:
-        response.close()
+        try:
+            response.close()
+        except:
+            return None
     

@@ -24,7 +24,7 @@ if __name__ == "__main__":
         stock_name= stock_array[1]
 
         info = StockMoneyFlow(stock_symbol, stock_name)
-        if info.isValid():
+        if info.isValid() and not info.isChuangye():
             stocks_money_flow.append(info)
 
         if len(stocks_money_flow) > 0 and len(stocks_money_flow)%100 == 0:
