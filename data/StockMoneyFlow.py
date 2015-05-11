@@ -1,6 +1,7 @@
 import re
 
 from utils import crawler
+from time import sleep
 
 
 class StockMoneyFlow:
@@ -13,8 +14,11 @@ class StockMoneyFlow:
         url = "http://vip.stock.finance.sina.com.cn/quotes_service/api/jsonp.php/varmoneyFlowData=/MoneyFlow.ssi_ssfx_flzjtj?daima=%s&gettime=1" % symbol
         html = crawler.crawl(url)
         if html is None:
-            self.state = 0
-            return
+            sleep(5)
+            html = crawler.crawl(url)
+            if html is None:
+                self.state = 0
+                return
         else:
             self.state = 1
 
