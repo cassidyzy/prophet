@@ -6,6 +6,7 @@ from time import sleep
 
 class StockMoneyFlow:
     def __init__(self, symbol, name):
+        self.state = 0
         self.symbol = symbol
         self.name = name
         self._crawl4Attrs(symbol)
@@ -17,10 +18,9 @@ class StockMoneyFlow:
             sleep(5)
             html = crawler.crawl(url)
             if html is None:
-                self.state = 0
                 return
-        else:
-            self.state = 1
+
+        self.state = 1
 
         superbig_volume_in = self._reg4Value(html, "r0_in")
         if superbig_volume_in is not None:

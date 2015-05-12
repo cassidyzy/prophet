@@ -3,8 +3,8 @@ import time
 import codecs
 import sys
 
-BIG_VOLUME_IN_VALUE = 15
-SMALL_VOLUME_IN_VALUE = 0
+from data.Constant import ConstantValue
+
 OUTPUT_NUM = 30
 
 def read_stock_money_flow(cur_date):
@@ -42,13 +42,11 @@ def stock_money_flow_status(cur_date):
             big_volume_ratio = (superbig_volume_in+big_volume_in-superbig_volume_out-big_volume_out)/(total_volume*trade)*100
             small_volume_ratio = (supersmall_volume_in+small_volume_in-supersmall_volume_out-small_volume_out)/(total_volume*trade)*100
 
-            #if big_volume_ratio > 20 and changeratio*100 < 5 and small_volume_ratio < 0:
-            if True or big_volume_ratio > 10 and small_volume_ratio < 0:
-                add_str = cur_date+"|"+symbol+"|"+name+"|"+str(round(big_volume_ratio,1))+"|"+str(round(small_volume_ratio,1))+"|"+str(round(changeratio*100,2))+"|"+str(turnover)
-                return_dict[symbol] = add_str
-
+            add_str = cur_date+"|"+symbol+"|"+name+"|"+str(round(big_volume_ratio,1))+"|"+str(round(small_volume_ratio,1))+"|"+str(round(changeratio*100,2))+"|"+str(turnover)
+            return_dict[symbol] = add_str
 
     return return_dict
+
 
 def output_bigin_smallout_foralldays(stocks_dict_set):
 
@@ -57,7 +55,7 @@ def output_bigin_smallout_foralldays(stocks_dict_set):
     for d in stocks_dict_set:
         selected_symbol_set = selected_symbol_set & d.keys()
 
-    #get stocks with big volume in and small volume out for all days
+    #total volume and price change for all days
     volume_per_price = {}
 
     print("symbol\t\tname\t\tbig (%)\tsmall (%)\tprice (%)\tbig/price\tturnover")
@@ -83,12 +81,13 @@ def output_bigin_smallout_foralldays(stocks_dict_set):
         file_output_str = output_array[0]+","+output_array[1]+","+output_array[2]+","+output_array[3]+","+output_array[4]+","+output_array[5]+","+str(item[1])+"\n"
         file_object.write(file_output_str)
         num = num + 1
-        if num <= 30:
+        if num <= OUTPUT_NUM:
             print(output_str)
 
 
 if __name__ == "__main__":
-    cur_date_set = ["2015-05-11", "2015-05-08"]
+
+    cur_date_set = ConstantValue.date_set
 
     stocks_dict_set = []
 
