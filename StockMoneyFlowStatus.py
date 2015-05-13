@@ -67,7 +67,7 @@ def output_bigin_smallout_foralldays(stocks_dict_set, stock_custom_set):
     #total volume and price change for all days
     volume_per_price = {}
 
-    print("symbol\t\tname\t\tbig (%)\tsmall (%)\tprice (%)\tbig/price\tturnover")
+    print("symbol\t\tname\t\tbig (%)\tsmall (%)\tprice (%)\tturnover\tbig/price")
     for stock in selected_symbol_set:
         total_big_volume_in = 0
         total_small_volume_in = 0
@@ -117,7 +117,7 @@ if __name__ == "__main__":
 
     if stock_custom_set == "":
         file_object = codecs.open(home_dir+"results/moneyflowstatus/"+cur_date_set[0]+".csv", "w",'gbk')
-        output = "symbol,name,big in(%),small in(%),price(%),big/price,turnover\n"
+        output = "symbol,name,big in(%),small in(%),price(%),turnover,big/price\n"
         file_object.write(output)
 
 
