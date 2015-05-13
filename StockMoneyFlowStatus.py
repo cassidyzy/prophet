@@ -86,6 +86,8 @@ def output_bigin_smallout_foralldays(stocks_dict_set, stock_custom_set):
             volume_per_price[key_value] = 1
         elif (total_big_volume_in > 0 and total_price_change > 0):
             volume_per_price[key_value] = round(total_big_volume_in/total_price_change, 2)
+        elif (total_big_volume_in > 0 and total_price_change <= 0):
+            volume_per_price[key_value] = 9999
 
     num = 0
     for item in sorted(volume_per_price.items(), key=lambda d: d[1], reverse=True):
