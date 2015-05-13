@@ -8,5 +8,6 @@ sh $HOME/.bash_profile
 
 cd $WORK_HOME
 $PYTHON_HOME/bin/python3 StockMoneyFlowCollector.py
-git commit -a -m "MOD: update daily money flow data"
+git add results
+git commit -m "MOD: update daily money flow data"
 git push
