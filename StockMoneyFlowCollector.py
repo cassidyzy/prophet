@@ -4,16 +4,17 @@ import pickle
 import re
 import time
 
+from data.Constant import ConstantValue
 from data.StockMoneyFlow import StockMoneyFlow
 from utils import crawler
 
-HOME_DIR = "/root/prophet"
-
 def read_stock_list():
-    fi = open(HOME_DIR+"/stock-list.txt", "rb")
+    fi = open(home_dir+"stock-list.txt", "rb")
     return pickle.load(fi)
 
 if __name__ == "__main__":
+
+    home_dir = ConstantValue.HOME_DIR
     print("get stock money flow start:")
 
     stock_list = read_stock_list()
@@ -35,7 +36,7 @@ if __name__ == "__main__":
     print("total valid stock money flow: %d in %d" % (len(stocks_money_flow), len(stock_list)))
 
     cur_date = info.opendate
-    out = open(HOME_DIR+"/results/moneyflowdata/stock-money-flow-"+cur_date, "wb")
+    out = open(home_dir+"results/moneyflowdata/stock-money-flow-"+cur_date, "wb")
     pickle.dump(stocks_money_flow, out)
     out.close()
         
