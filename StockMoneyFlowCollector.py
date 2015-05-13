@@ -7,7 +7,7 @@ import time
 from data.StockMoneyFlow import StockMoneyFlow
 from utils import crawler
 
-HOME_DIR = "/root/prophet"
+HOME_DIR = "."
 
 def read_stock_list():
     fi = open(HOME_DIR+"/stock-list.txt", "rb")
