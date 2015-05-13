@@ -79,9 +79,12 @@ def output_bigin_smallout_foralldays(stocks_dict_set, stock_custom_set):
             total_small_volume_in = total_small_volume_in + float(result_array[4])
             total_price_change = total_price_change + float(result_array[5])
 
+        key_value = "%s|%s|%s|%s|%s|%s" % (result_array[1], result_array[2], str(round(total_big_volume_in, 2)), str(round(total_small_volume_in, 2)), str(round(total_price_change,2)), str(result_array[6]))
+
         #for custom set, print all money flow info
-        if stock_custom_set != "" or (total_big_volume_in > 0 and total_price_change > 0):
-            key_value = "%s|%s|%s|%s|%s|%s" % (result_array[1], result_array[2], str(round(total_big_volume_in, 2)), str(round(total_small_volume_in, 2)), str(round(total_price_change,2)), str(result_array[6]))
+        if stock_custom_set != "":
+            volume_per_price[key_value] = 1
+        elif (total_big_volume_in > 0 and total_price_change > 0):
             volume_per_price[key_value] = round(total_big_volume_in/total_price_change, 2)
 
     num = 0
