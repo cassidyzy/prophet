@@ -9,7 +9,7 @@ from utils import crawler
 
 
 def read_stock_list():
-    fi = open("stock-list.txt", "rb")
+    fi = open("/root/prophet/stock-list.txt", "rb")
     return pickle.load(fi)
 
 if __name__ == "__main__":
