@@ -7,9 +7,10 @@ import time
 from data.StockMoneyFlow import StockMoneyFlow
 from utils import crawler
 
+HOME_DIR = "/root/prophet"
 
 def read_stock_list():
-    fi = open("/root/prophet/stock-list.txt", "rb")
+    fi = open(HOME_DIR+"/stock-list.txt", "rb")
     return pickle.load(fi)
 
 if __name__ == "__main__":
@@ -34,7 +35,7 @@ if __name__ == "__main__":
     print("total valid stock money flow: %d in %d" % (len(stocks_money_flow), len(stock_list)))
 
     cur_date = info.opendate
-    out = open("results/moneyflowdata/stock-money-flow-"+cur_date, "wb")
+    out = open(HOME_DIR+"/results/moneyflowdata/stock-money-flow-"+cur_date, "wb")
     pickle.dump(stocks_money_flow, out)
     out.close()
         
