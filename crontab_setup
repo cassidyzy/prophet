@@ -1,3 +1,0 @@
-40 11 * * * /root/prophet/autosubmit.sh
-20 15 * * * /root/prophet/autosubmit.sh
-
