@@ -10,4 +10,5 @@ cd $WORK_HOME
 $PYTHON_HOME/bin/python3 StockMoneyFlowCollector.py
 git add results
 git commit -m "MOD: update daily money flow data"
+git pull --rebase
 git push
