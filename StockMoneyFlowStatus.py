@@ -11,7 +11,7 @@ from utils import AvgData
 def output_bigin_smallout_foralldays():
 
     selected_symbol_set = []
-    if stock_custom_set == "":
+    if stock_custom_set == "" or stock_custom_set == "all":
         # get all availabile stock symbols
         selected_symbol_set = AllStockSet.all_stock_set()
     else:
@@ -28,6 +28,9 @@ def output_bigin_smallout_foralldays():
     print("symbol\t\tname\t\tbig (%)\tsmall (%)\tprice (%)\tturnover\tbig/price")
 
     for stock in selected_symbol_set:
+        if stock not in avg_data_dict:
+            continue
+
         total_big_volume_in = 0
         total_small_volume_in = 0
         total_price_change = 0
@@ -42,14 +45,17 @@ def output_bigin_smallout_foralldays():
             trade_value = float(result_array[5])
             total_price_change = total_price_change + float(result_array[6])
 
-        avg_volume = float(avg_volume_dict[stock].split("|")[1])
-        key_value = "%s|%s|%s|%s|%s|%s" % (result_array[1], result_array[2], str(round(total_big_volume_in/trade_value/avg_volume*100, 2)), str(round(total_small_volume_in/trade_value/avg_volume*100, 2)), str(round(total_price_change,2)), str(result_array[8]))
+        avg_volume = float(avg_data_dict[stock].split("|")[1])
+        if trade_value==0 or avg_volume==0:
+            continue
+
+        key_value = "%s|%s|%s|%s|%s|%s" % (result_array[1], result_array[2], str(round(total_big_volume_in/trade_value/avg_volume*100, 2)), str(round(total_small_volume_in/trade_value/avg_volume*100, 2)), str(round(total_price_change*100,2)), str(result_array[8]))
 
         if output_num == 0:
             #no filter set, print all money flow info
             volume_per_price[key_value] = 1
         elif (total_big_volume_in > 0 and total_price_change > 0):
-            volume_per_price[key_value] = round(total_big_volume_in/total_price_change, 2)
+            volume_per_price[key_value] = round(total_big_volume_in/trade_value/avg_volume/total_price_change, 2)
         elif (total_big_volume_in > 0 and total_price_change <= 0):
             volume_per_price[key_value] = 9999
 
@@ -83,14 +89,14 @@ if __name__ == "__main__":
         output_num = int(sys.argv[3])
     if len(sys.argv)>=3:
         stock_custom_set = sys.argv[1]
-        day_num = int(sys.argv[2])
+        day_num = min(len(cur_date_set), int(sys.argv[2]))
     elif len(sys.argv)>=2:
         stock_custom_set = sys.argv[1]
 
     #get all stock data for all days
     stocks_dict_set = StockDailyMerge.merge_daily_stock_data()
     #get average data for each stock
-    avg_volume_dict = AvgData.MA20_values(stocks_dict_set)
+    avg_data_dict = AvgData.MA20_values(stocks_dict_set)
 
 #    for i in range(0, day_num):
 #        stocks_dict_set.append(stock_money_flow_status(cur_date_set[i]))
