@@ -1,10 +1,10 @@
 import pickle
 
 from data.Constant import ConstantValue
-from utils import AllStockSet
+from utils import AllStockDict
 from utils import StockDailyMerge
 
-stock_set = AllStockSet.all_stock_set()
+stock_set = AllStockDict.all_stock_dict().keys()
 
 def avg_values(stocks_dict_set, avg_day_num):
 
