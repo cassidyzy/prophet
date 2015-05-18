@@ -28,6 +28,9 @@ class StockBasicInfo:
         profit_per_stock = self._reg4Value(html, "fourQ_mgsy")
         if profit_per_stock is not None:
             self.profit_per_stock = float(profit_per_stock) 
+        capital = self._reg4Value(html, "totalcapital")
+        if capital is not None:
+            self.capital = int(float(capital) * 10000)
     
     def _reg4Value(self, html, key):
         m = re.search(r"var %s ?= ?([^;]*?);" % key, html)
@@ -40,4 +43,5 @@ class StockBasicInfo:
         return self.state == 1
         
     def __str__(self):
-        return "%s|%s|%s|%s|%s" % (self.symbol, self.name, self.state, self.net_estate, self.profit_per_stock)
+        return "%s|%s|%s|%s|%s|%s" % (self.symbol, self.name, self.state, 
+                                      self.net_estate, self.profit_per_stock, self.capital)
