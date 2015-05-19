@@ -6,9 +6,11 @@ WORK_HOME=$HOME/prophet
 
 sh $HOME/.bash_profile
 
+t=`date`
+
 cd $WORK_HOME
 git pull --rebase
 $PYTHON_HOME/bin/python3 StockMoneyFlowCollector.py
 git add results
-git commit -m "MOD: update daily money flow data"
+git commit -m "MOD: update daily money flow data, $t"
 git push

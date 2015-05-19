@@ -4,16 +4,18 @@ import codecs
 import sys
 
 from data.Constant import ConstantValue
-from utils import AllStockSet
+from utils import AllStockDict
 from utils import StockDailyMerge
 from utils import AvgData
 
 def output_bigin_smallout_foralldays():
 
     selected_symbol_set = []
+    all_stock_dict = AllStockDict.all_stock_dict()
+
     if stock_custom_set == "" or stock_custom_set == "all":
         # get all availabile stock symbols
-        selected_symbol_set = AllStockSet.all_stock_set()
+        selected_symbol_set = all_stock_dict.keys()
     else:
         # get custom stock list
         file_read = open(home_dir+stock_custom_set, "r")
@@ -46,6 +48,11 @@ def output_bigin_smallout_foralldays():
             total_price_change = total_price_change + float(result_array[6])
 
         avg_volume = float(avg_data_dict[stock].split("|")[1])
+
+        #filter stock only smaller than 5 billion
+        if int(all_stock_dict[stock])*trade_value > max_capital:
+            continue
+
         if trade_value==0 or avg_volume==0:
             continue
 
@@ -75,6 +82,7 @@ if __name__ == "__main__":
 
     cur_date_set = ConstantValue.DATE_SET
     home_dir = ConstantValue.HOME_DIR
+    max_capital = ConstantValue.COMPANY_DAPITAL_SIZE
 
     #default all stocks
     stock_custom_set = ""
