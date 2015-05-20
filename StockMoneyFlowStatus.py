@@ -50,10 +50,12 @@ def output_bigin_smallout_foralldays():
         avg_volume = float(avg_data_dict[stock].split("|")[1])
 
         #filter stock only smaller than 5 billion
-        if int(all_stock_dict[stock])*trade_value > max_capital:
+        if (stock_custom_set == "" or stock_custom_set == "all") and int(all_stock_dict[stock])*trade_value > max_capital:
             continue
 
         if trade_value==0 or avg_volume==0:
+            continue
+        if stock_custom_set.find("zy")<0 and (round(total_big_volume_in/trade_value/avg_volume*100) < 30 or total_price_change*100 > 9.5):
             continue
 
         key_value = "%s|%s|%s|%s|%s|%s" % (result_array[1], result_array[2], str(round(total_big_volume_in/trade_value/avg_volume*100, 2)), str(round(total_small_volume_in/trade_value/avg_volume*100, 2)), str(round(total_price_change*100,2)), str(result_array[8]))
