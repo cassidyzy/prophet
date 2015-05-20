@@ -1,6 +1,6 @@
 import pickle
 
-from data.Constant import ConstantValue
+from src.common.Constant import ConstantValue
 
 def read_daily_stock_data(cur_date):
     home_dir = ConstantValue.HOME_DIR

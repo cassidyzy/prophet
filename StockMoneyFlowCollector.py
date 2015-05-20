@@ -4,7 +4,7 @@ import pickle
 import re
 import time
 
-from data.Constant import ConstantValue
+from src.common.Constant import ConstantValue
 from data.StockMoneyFlow import StockMoneyFlow
 from src.crawl import crawler
 

@@ -3,7 +3,7 @@ import time
 import codecs
 import sys
 
-from data.Constant import ConstantValue
+from src.common.Constant import ConstantValue
 from utils import AllStockDict
 from utils import StockDailyMerge
 
