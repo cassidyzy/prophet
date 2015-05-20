@@ -36,8 +36,10 @@ def output_bigin_smallout_foralldays():
         total_big_volume_in = 0
         total_small_volume_in = 0
         total_price_change = 0
-
-        for i in range(0, day_num):
+        
+        i = day_num - 1
+        #for i in range(0, day_num):
+        for j in range(0, 1):
             d = stocks_dict_set[i]
             if not stock in d:
                 continue
