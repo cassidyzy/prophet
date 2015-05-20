@@ -6,7 +6,7 @@ import time
 
 from data.Constant import ConstantValue
 from data.StockMoneyFlow import StockMoneyFlow
-from utils import crawler
+from src.crawl import crawler
 
 def read_stock_list():
     fi = open(home_dir+"stock-list.txt", "rb")
