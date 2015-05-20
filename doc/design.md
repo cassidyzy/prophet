@@ -8,7 +8,7 @@
 项目环境
 -------------------
 * linux
-* python 2.7 or python 3
+* python 3
 
 
 项目组织
