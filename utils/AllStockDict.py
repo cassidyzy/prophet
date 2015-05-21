@@ -1,6 +1,6 @@
 import re
 import pickle
-from src.common..Constant import ConstantValue
+from src.common.Constant import ConstantValue
 
 def all_stock_dict():
     stock_dict = {}
