@@ -1,4 +1,4 @@
-import StockListReader
+from src.data import StockListReader
 
 if __name__ == "__main__":
     stocks = StockListReader.read_stock_list()
