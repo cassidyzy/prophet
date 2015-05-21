@@ -1,6 +1,6 @@
 import re
 
-from utils import crawler
+from src.crawl import crawler
 
 
 class StockBasicInfo:

@@ -4,7 +4,7 @@ import pickle
 import re
 
 from data.Stock import StockBasicInfo
-from utils import crawler
+from src.crawl import crawler
 
 
 def crawl_stock_info(url):
