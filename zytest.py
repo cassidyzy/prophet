@@ -1,5 +1,5 @@
 from src.compute import StockDailyMerge
-from utils import AvgData
+from src.compute import AvgData
 
 
 
