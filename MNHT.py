@@ -5,7 +5,7 @@ import sys
 
 from src.common.Constant import ConstantValue
 from src.data import AllStockDict
-from utils import StockDailyMerge
+from src.compute import StockDailyMerge
 from utils import AvgData
 
 def find_mnht1_stocks():

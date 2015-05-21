@@ -2,7 +2,7 @@ import pickle
 
 from src.common.Constant import ConstantValue
 from src.data import AllStockDict
-from utils import StockDailyMerge
+from src.compute import StockDailyMerge
 
 stock_set = AllStockDict.all_stock_dict().keys()
 

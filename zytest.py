@@ -1,4 +1,4 @@
-from utils import StockDailyMerge
+from src.compute import StockDailyMerge
 from utils import AvgData
 
 
