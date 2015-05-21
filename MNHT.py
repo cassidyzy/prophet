@@ -4,7 +4,7 @@ import codecs
 import sys
 
 from src.common.Constant import ConstantValue
-from utils import AllStockDict
+from src.data import AllStockDict
 from utils import StockDailyMerge
 from utils import AvgData
 
