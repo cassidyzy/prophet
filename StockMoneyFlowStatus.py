@@ -27,7 +27,6 @@ def output_bigin_smallout_foralldays():
     #total volume and price change for all days
     volume_per_price = {}
 
-    print("symbol\t\tname\t\tbig (%)\tsmall (%)\tprice (%)\tturnover\tbig/price")
 
     for stock in selected_symbol_set:
         if stock not in avg_data_dict:
@@ -57,8 +56,8 @@ def output_bigin_smallout_foralldays():
 
         if trade_value==0 or avg_volume==0:
             continue
-        if stock_custom_set.find("zy")<0 and (round(total_big_volume_in/trade_value/avg_volume*100) < 30 or total_price_change*100 > 9.5):
-            continue
+        #if stock_custom_set.find("zy")<0 and (round(total_big_volume_in/trade_value/avg_volume*100) < 30 or total_price_change*100 > 9.5):
+        #    continue
 
         key_value = "%s|%s|%s|%s|%s|%s" % (result_array[1], result_array[2], str(round(total_big_volume_in/trade_value/avg_volume*100, 2)), str(round(total_small_volume_in/trade_value/avg_volume*100, 2)), str(round(total_price_change*100,2)), str(result_array[8]))
 
@@ -119,6 +118,7 @@ if __name__ == "__main__":
 #        file_object.write(output)
 
     #make average volume for every stock
+    #print("symbol\t\tname\t\tbig (%)\tsmall (%)\tprice (%)\tturnover\tbig/price")
     output_bigin_smallout_foralldays()
 
 #    if stock_custom_set == "":
