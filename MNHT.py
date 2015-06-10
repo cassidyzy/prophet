@@ -58,9 +58,9 @@ def find_mnht1_stocks():
             if total_capital > 100 or current_price > 20:
                 continue
             print("MNHT1: %s %s %d" % (stock, stock_name, total_capital))
-            print(stock_price_set)
-            print(stock_volume_set)
-            print("\n")
+            #print(stock_price_set)
+            #print(stock_volume_set)
+            #print("\n")
 
 
 
@@ -111,9 +111,9 @@ def find_mnht2_stocks():
             if total_capital > 100 or current_price > 20:
                 continue
             print("MNHT2: %s %s %d" % (stock, stock_name, total_capital))
-            print(stock_price_set)
-            print(stock_volume_set)
-            print("\n")
+            #print(stock_price_set)
+            #print(stock_volume_set)
+            #print("\n")
 
 
 def find_mnht3_stocks():
@@ -178,5 +178,5 @@ if __name__ == "__main__":
 
     find_mnht1_stocks()
     find_mnht2_stocks()
-#    find_mnht3_stocks()
+    find_mnht3_stocks()
 
