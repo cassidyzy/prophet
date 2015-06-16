@@ -162,6 +162,52 @@ def find_mnht3_stocks():
                 continue
             print("MNHT3: %s %s %d" % (stock, stock_name, total_capital))
 
+def find_yysx_stocks():
+
+    for stock in selected_symbol_set:
+
+        day_num = len(cur_date_set)
+        YYSX_flag = 0
+        min_price = 50000
+        max_price = 0
+        stock_price_set = []
+        stock_volume_set = []
+
+        for i in range(0, day_num):
+            d = stocks_dict_set[i]
+            if not stock in d:
+                break
+
+            result_array = d[stock].split("|")
+
+            stock_name = result_array[2]
+            stock_price = float(result_array[5])
+            stock_price_change = float(result_array[6])*100
+            stock_volume = float(result_array[7])
+
+            if stock_price < min_price:
+                min_price = stock_price
+
+            if stock_price > max_price:
+                max_price = stock_price
+
+            avg_volume = float(avg_data_dict[stock].split("|")[1])
+            avg_volume_5 = float(avg_data_dict_5[stock].split("|")[1])
+            avg_price_5 = float(avg_data_dict_5[stock].split("|")[0])
+            avg_price_10 = float(avg_data_dict_10[stock].split("|")[0])
+            avg_price_20 = float(avg_data_dict_20[stock].split("|")[0])
+
+            if i <= 2 and stock_volume > avg_volume_5*2 and stock_price_change > 9.8 and stock_price > max(avg_price_5, avg_price_10, avg_price_20) and stock_price * (100-stock_price_change)/100 < min(avg_price_5, avg_price_10, avg_price_20):
+                YYSX_flag = 1
+            if i <= 2 and stock_volume > avg_volume_5*0.8 and stock_volume < avg_volume_5*1.2 and stock_price_change < 8 and stock_price > max(avg_price_5, avg_price_10, avg_price_20) and stock_price * (100-stock_price_change)/100 < min(avg_price_5, avg_price_10, avg_price_20):
+                YYSX_flag = 2
+
+        if YYSX_flag > 0:
+            total_capital = int(int(all_stock_dict[stock])*stock_price/100000000)
+            if total_capital > 100:
+                continue
+            print("YYSX%d: %s %s %d" % (YYSX_flag, stock, stock_name, total_capital))
+
 
 if __name__ == "__main__":
 
@@ -172,6 +218,9 @@ if __name__ == "__main__":
     #get all stock data for all days
     stocks_dict_set = StockDailyMerge.merge_daily_stock_data()
     avg_data_dict = AvgData.MA55_values(stocks_dict_set)
+    avg_data_dict_5 = AvgData.MA5_values(stocks_dict_set)
+    avg_data_dict_10 = AvgData.MA10_values(stocks_dict_set)
+    avg_data_dict_20 = AvgData.MA20_values(stocks_dict_set)
 
     all_stock_dict = AllStockDict.all_stock_dict()
     selected_symbol_set = all_stock_dict.keys()
@@ -179,4 +228,5 @@ if __name__ == "__main__":
     find_mnht1_stocks()
     find_mnht2_stocks()
     find_mnht3_stocks()
+    find_yysx_stocks()
 

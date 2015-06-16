@@ -37,17 +37,19 @@ def output_bigin_smallout_foralldays():
         total_price_change = 0
         
         i = day_num - 1
-        #for i in range(0, day_num):
-        for j in range(0, 1):
+        for i in range(0, day_num):
+        #for j in range(0, 1):
             d = stocks_dict_set[i]
             if not stock in d:
                 continue
             result_array = d[stock].split("|")
             total_big_volume_in = total_big_volume_in + float(result_array[3])
             total_small_volume_in = total_small_volume_in + float(result_array[4])
+            #print(str(result_array))
             trade_value = float(result_array[5])
             total_price_change = total_price_change + float(result_array[6])
 
+        
         avg_volume = float(avg_data_dict[stock].split("|")[1])
 
         #filter stock only smaller than 5 billion
@@ -83,7 +85,7 @@ def output_bigin_smallout_foralldays():
 
 if __name__ == "__main__":
 
-    cur_date_set = ConstantValue.DATE_SET
+    cur_date_set = ConstantValue.DATE_SET[:5]
     home_dir = ConstantValue.HOME_DIR
     max_capital = ConstantValue.COMPANY_DAPITAL_SIZE
 
@@ -92,7 +94,7 @@ if __name__ == "__main__":
     #default no filter, list all results
     output_num = 0
     #default days
-    day_num = 1
+    day_num = 5
 
     if len(sys.argv)>=4:
         stock_custom_set = sys.argv[1]
@@ -103,6 +105,9 @@ if __name__ == "__main__":
         day_num = min(len(cur_date_set), int(sys.argv[2]))
     elif len(sys.argv)>=2:
         stock_custom_set = sys.argv[1]
+    else:
+        stock_custom_set = "all"
+        output_num = 30
 
     #get all stock data for all days
     stocks_dict_set = StockDailyMerge.merge_daily_stock_data()
