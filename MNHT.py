@@ -35,6 +35,8 @@ def find_mnht1_stocks():
                 current_price = stock_price
 
             stock_price_change = float(result_array[6])*100
+            if i==0:
+                price_change_today = stock_price_change
             stock_volume = float(result_array[7])
             stock_volume_set.append(stock_volume)
 
@@ -57,7 +59,11 @@ def find_mnht1_stocks():
             total_capital = int(int(all_stock_dict[stock])*stock_price/100000000)
             if total_capital > 100 or current_price > 20:
                 continue
-            print("MNHT1: %s %s %d" % (stock, stock_name, total_capital))
+            print("MNHT1: %s %s %d %f%%" % (stock, stock_name, total_capital, price_change_today))
+            f = open("result.txt", "a")
+            f.write("MNHT1: %s %s %d %f%%\n" % (stock, stock_name, total_capital, price_change_today))
+            f.close()
+
             #print(stock_price_set)
             #print(stock_volume_set)
             #print("\n")
@@ -92,6 +98,8 @@ def find_mnht2_stocks():
             stock_price_set.append(stock_price)
 
             stock_price_change = float(result_array[6])*100
+            if i==0:
+                price_change_today = stock_price_change
             stock_volume = float(result_array[7])
             stock_volume_set.append(stock_volume)
 
@@ -110,7 +118,10 @@ def find_mnht2_stocks():
             total_capital = int(int(all_stock_dict[stock])*stock_price/100000000)
             if total_capital > 100 or current_price > 20:
                 continue
-            print("MNHT2: %s %s %d" % (stock, stock_name, total_capital))
+            print("MNHT2: %s %s %d %f%%" % (stock, stock_name, total_capital, price_change_today))
+            f = open("result.txt", "a")
+            f.write("MNHT2: %s %s %d %f%%\n" % (stock, stock_name, total_capital, price_change_today))
+            f.close()
             #print(stock_price_set)
             #print(stock_volume_set)
             #print("\n")
@@ -137,6 +148,8 @@ def find_mnht3_stocks():
             stock_name = result_array[2]
             stock_price = float(result_array[5])
             stock_price_change = float(result_array[6])*100
+            if i==0:
+                price_change_today = stock_price_change
             stock_volume = float(result_array[7])
 
             if stock_price < min_price:
@@ -160,7 +173,10 @@ def find_mnht3_stocks():
             total_capital = int(int(all_stock_dict[stock])*stock_price/100000000)
             if total_capital > 100:
                 continue
-            print("MNHT3: %s %s %d" % (stock, stock_name, total_capital))
+            print("MNHT3: %s %s %d %f%%" % (stock, stock_name, total_capital, price_change_today))
+            f = open("result.txt", "a")
+            f.write("MNHT3: %s %s %d %f%%\n" % (stock, stock_name, total_capital, price_change_today))
+            f.close()
 
 def find_yysx_stocks():
 
@@ -183,6 +199,8 @@ def find_yysx_stocks():
             stock_name = result_array[2]
             stock_price = float(result_array[5])
             stock_price_change = float(result_array[6])*100
+            if i==0:
+                price_change_today = stock_price_change
             stock_volume = float(result_array[7])
 
             if stock_price < min_price:
@@ -206,7 +224,10 @@ def find_yysx_stocks():
             total_capital = int(int(all_stock_dict[stock])*stock_price/100000000)
             if total_capital > 100:
                 continue
-            print("YYSX%d: %s %s %d" % (YYSX_flag, stock, stock_name, total_capital))
+            print("YYSX%d: %s %s %d %f%%" % (YYSX_flag, stock, stock_name, total_capital, price_change_today))
+            f = open("result.txt", "a")
+            f.write("YYSX%d: %s %s %d %f%%\n" % (YYSX_flag, stock, stock_name, total_capital, price_change_today))
+            f.close()
 
 
 if __name__ == "__main__":
@@ -224,6 +245,8 @@ if __name__ == "__main__":
 
     all_stock_dict = AllStockDict.all_stock_dict()
     selected_symbol_set = all_stock_dict.keys()
+    f = open("result.txt", "w")
+    f.close()
 
     find_mnht1_stocks()
     find_mnht2_stocks()
